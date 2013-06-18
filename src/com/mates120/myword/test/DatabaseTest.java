@@ -1,8 +1,18 @@
 package com.mates120.myword.test;
 
-//import android.test.ActivityInstrumentationTestCase2;
-import com.mates120.myword.DatabaseHelper;
+import junit.framework.TestCase;
 
-public class DatabaseTest {
+public class DatabaseTest extends TestCase {
+
+	protected static void setUpBeforeClass() throws Exception {
+	}
+
+	protected void setUp() throws Exception {
+		super.setUp();
+	}
+	
+	public void testWordInsert(){
+		
+	}
 
 }
