@@ -3,11 +3,11 @@ package com.mates120.myword.test;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.content.Context;
 import android.test.AndroidTestCase;
 
 import com.mates120.myword.Dictionary;
 import com.mates120.myword.DictionaryManager;
+import com.mates120.myword.Value;
 import com.mates120.myword.Word;
 
 
@@ -21,7 +21,7 @@ public class DatabaseTest extends AndroidTestCase {
 		dictionaryManager = new DictionaryManager(getContext());
 	}
 	
-	public void test1DictionaryAdd(){
+	public void testDictionary1Add(){
 		System.out.println("TEST: ADD DICTIONARY1 (test1Dict)");
 		Dictionary testDictionary = new Dictionary("test1Dict");
 		List <String> testWord1Values = new ArrayList<String>();
@@ -42,7 +42,7 @@ public class DatabaseTest extends AndroidTestCase {
 		dictionaryManager.addDictionary(testDictionary);
 	}
 	
-	public void test2DictionaryAdd(){
+	public void testDictionary2Add(){
 		System.out.println("TEST: ADD DICTIONARY2 (test2Dict)");
 		Dictionary testDictionary = new Dictionary("test2Dict");
 		List <String> testWord1Values = new ArrayList<String>();
@@ -63,18 +63,27 @@ public class DatabaseTest extends AndroidTestCase {
 		dictionaryManager.addDictionary(testDictionary);
 	}
 	
-	public void test1DictionaryDelete(){
+	public void testDictionaryDelete1(){
 		System.out.println("TEST: DELETE DICTIONARY1 (test1Dict)");
 		dictionaryManager.deleteDictionary("test1Dict");
 	}
 	
-	public void test1FindWord(){
+	public void testFindWord1(){
 		System.out.println("TEST: FIND EXISTING WORD");
-		Word wordToFind = dictionaryManager.getWord("source2everywhere");
-		System.out.println(wordToFind.getSource());
-		for(int i = 0; i < wordToFind.getValues().size(); i++){
-			System.out.println(wordToFind.getValue(i).getValue());
-		}
+		Word assertWord = new Word("source2everywhere");
+		List<Value> values = new ArrayList<Value>();
+		values.add(new Value("d2w2value1", "test2Dict"));
+		values.add(new Value("d2w2value2", "test2Dict"));
+		values.add(new Value("d2w2value3", "test2Dict"));
+		assertWord.setValues(values);
+		Word findWord = dictionaryManager.getWord("source2everywhere");
+		assertTrue(findWord.equals(assertWord));
+	}
+		
+	public void testFindWord2(){
+		System.out.println("TEST: FIND NON-EXISTING WORD");
+		Word wordToFind = dictionaryManager.getWord("noexist");
+		assertEquals(wordToFind, null);
 	}
 
 }
