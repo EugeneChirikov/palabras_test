@@ -10,10 +10,10 @@ import com.mates120.myword.DictionaryManager;
 import com.mates120.myword.Value;
 import com.mates120.myword.Word;
 
-public class DataBaseTestBase {
+public class DataBaseTestUtils {
 	private DictionaryManager dictionaryManager;
 	
-	public DataBaseTestBase(Context context){
+	public DataBaseTestUtils(Context context){
 		dictionaryManager = new DictionaryManager(context);
 	}
 	
