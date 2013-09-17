@@ -10,10 +10,10 @@ import com.mates120.myword.DictionaryManager;
 import com.mates120.myword.Value;
 import com.mates120.myword.Word;
 
-public class TestBase {
+public class DataBaseTestBase {
 	private DictionaryManager dictionaryManager;
 	
-	public TestBase(Context context){
+	public DataBaseTestBase(Context context){
 		dictionaryManager = new DictionaryManager(context);
 	}
 	
@@ -47,12 +47,22 @@ public class TestBase {
 	}
 	
 	public void deleteDictionary(String dictName){
-		dictionaryManager.deleteDictionary("Dict1");
+		dictionaryManager.deleteDictionary(dictName);
 	}
 	
 	public Word generateWord(String source, int[] dictsIndexes){
 		Word genWord = new Word(source);
+		int wordIndex = Integer.valueOf(source.split("source")[1]);
 		List<Value> values = new ArrayList<Value>();
+		for (int i = 0; i < dictsIndexes.length; i++)
+			for (int j = 1; j <= 3; j ++)
+				values.add(new Value("d" + dictsIndexes[i] + "w" + wordIndex + "value" + j,
+						"Dict" + dictsIndexes[i]));
+		genWord.setValues(values);
 		return genWord;
+	}
+	
+	public Word getWordFromDB(String source){
+		return dictionaryManager.getWord(source);
 	}
 }
