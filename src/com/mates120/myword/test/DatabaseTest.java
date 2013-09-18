@@ -36,12 +36,14 @@ public class DatabaseTest extends AndroidTestCase {
 	
 	public void testWordFind(){
 		System.out.println("TEST: FIND COMMON WORD IN DICTIONARIES.");
-		Word assertWord = tb.generateWord("source42", new int[]{1 ,2 ,3});
+		Word assertWord = tb.generateWord("source12", new int[]{1 ,2 ,3});
 		for (int i = 1; i <= 3; i++)
-			tb.addDictionary(i, 200, 42);
-		Word foundWord = tb.getWordFromDB("source42");
+			tb.addDictionary(i, 200, 12);
+		Word foundWord = tb.getWordFromDB("source12");
 		assertTrue(foundWord.equals(assertWord));
 		assertEquals(tb.getWordFromDB("NoExist"), null);
+		for (int i = 1; i <= 3; i++)
+			tb.deleteDictionary("Dict" + i);
 	}
 	
 	public void testStressDictionaries(){
